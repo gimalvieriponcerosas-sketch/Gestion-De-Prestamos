@@ -1,10 +1,23 @@
-# Gestion-De-Prestamos
+# Gestion de Prestamos de Equipos de Laboratorio
 
-# Sistema de Control de Prestamos de Equipos de Laboratorio
+**Sistema de Control de Prestamos de Equipos de Laboratorio**
+
+SENATI Huánuco • CFP Amarilis
+Curso: Fullstack Developer Software
+Instructor: Ing. Darwin Uzuriaga Claudio
 
 Backend REST desarrollado para el trabajo practico de SENATI. Permite registrar usuarios, autenticarse con JWT, administrar el inventario de equipos de laboratorio y controlar los prestamos y devoluciones de cada equipo.
 
 La disponibilidad de un equipo se calcula a partir de la tabla `prestamos`: si un prestamo tiene `fecha_devolucion = NULL`, esta activo y el equipo no puede volver a prestarse.
+
+## Integrantes
+
+| Integrante | Rama | Responsabilidad |
+|---|---|---|
+| Gim Alvieri Ponce Rosas | `main` / `estructura-proyecto` | Repositorio, estructura del proyecto, README, informe y diapositiva |
+| Jerry Israel Suñiga Masgo | `base-datos` | MySQL, modelos Sequelize, relaciones, migraciones y datos de prueba |
+| Joseph Daniel Rubin Fonseca | `auth-equipos` | Registro, login, JWT, middleware, validaciones y CRUD de equipos |
+| Pholsing Hugo Rubio Poma | `prestamos-pruebas` | Prestamos, devolucion, regla de prestamo unico y pruebas en Postman |
 
 ## Tecnologias utilizadas
 
@@ -62,6 +75,7 @@ Gestion-De-Prestamos/
 - MySQL 8 en ejecucion (por ejemplo, mediante Laragon o XAMPP).
 - Un cliente de MySQL o phpMyAdmin para crear la base de datos.
 - Git, unicamente si se va a clonar el repositorio.
+- Postman (o herramienta equivalente) para las pruebas.
 
 ## Instalacion desde una copia limpia
 
@@ -176,6 +190,14 @@ PORT=3000
 | `PORT` | Puerto del servidor Express. |
 
 No se deben subir credenciales reales ni el archivo `.env` al repositorio.
+
+## Modelo de datos
+
+| Entidad | Campos |
+|---|---|
+| Usuario | id, nombre, correo (unico), contrasena (hash bcrypt) |
+| Equipo | id, codigo (unico), nombre, categoria, condicion |
+| Prestamo | id, equipo_id, usuario_id, prestatario, fecha_prestamo, fecha_prevista, fecha_devolucion |
 
 ## Migraciones
 
@@ -523,6 +545,36 @@ Todas las respuestas son JSON. Los errores tienen la forma:
 | `npm run db:migrate:undo` | Deshace la ultima migracion. |
 | `npm run db:seed` | Ejecuta los seeders de datos de demostracion. |
 
+## Pruebas
+
+Las pruebas se realizan con Postman. Casos verificados:
+
+| Caso | Resultado esperado |
+|---|---|
+| Acceso sin token o con token invalido | `401` |
+| Correo o codigo de equipo repetido | `409` |
+| Prestamo valido | Registro persistente y equipo no disponible |
+| Segundo prestamo activo del mismo equipo | `409`, sin duplicar |
+| Devolucion y nuevo prestamo | Equipo habilitado de nuevo |
+| Datos incompletos o fechas incoherentes | `400` con el campo invalido |
+| Id inexistente | `404` |
+| Reinicio del servidor | Los datos permanecen en MySQL |
+
+## Seguridad
+
+- Contrasenas almacenadas con hash (bcrypt).
+- Rutas de equipos y prestamos protegidas con JWT.
+- Credenciales y secreto leidos desde variables de entorno.
+- Consultas mediante Sequelize, sin concatenar entradas en SQL.
+- Validacion de entradas en el servidor.
+
+## Flujo de trabajo con GitHub
+
+1. Cada integrante trabaja en su propia rama.
+2. Se hacen commits pequenos y con mensajes claros.
+3. Los cambios se unen a `main` mediante Pull Request.
+4. Gim revisa y aprueba los Pull Requests.
+
 ## Notas academicas
 
 - No se incluye frontend. La API se prueba con Postman, Thunder Client, Insomnia o `curl`.
@@ -530,6 +582,4 @@ Todas las respuestas son JSON. Los errores tienen la forma:
 - Las contrasenas se almacenan unicamente como hash bcrypt.
 - Las consultas se realizan mediante Sequelize, sin concatenar SQL con datos del usuario.
 - No se usa `sequelize.sync()`; el esquema se controla con migraciones.
- Stashed changed
-# Gestión-De-Prestamos
-main
+- Todos los datos de usuarios y prestatarios son ficticios.
