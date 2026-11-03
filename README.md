@@ -1,3 +1,4 @@
+ estructura-proyecto
 Updated upstream
  HEAD
 "# Gestion De Prestamos" 
@@ -535,4 +536,6 @@ Todas las respuestas son JSON. Los errores tienen la forma:
 - Las contrasenas se almacenan unicamente como hash bcrypt.
 - Las consultas se realizan mediante Sequelize, sin concatenar SQL con datos del usuario.
 - No se usa `sequelize.sync()`; el esquema se controla con migraciones.
- Stashed changes
+ Stashed changed
+# Gestión-De-Prestamos
+main
