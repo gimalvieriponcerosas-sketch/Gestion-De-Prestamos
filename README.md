@@ -15,10 +15,10 @@ La disponibilidad de un equipo se calcula a partir de la tabla `prestamos`: si u
 | Integrante | Rama | Responsabilidad |
 |---|---|---|
 | Gim Alvieri Ponce Rosas | `main` / `estructura-proyecto` | Repositorio, estructura del proyecto, README, informe y diapositiva |
-| Jerry Israel Suñiga Masgo | `base-datos` | MySQL, modelos Sequelize, relaciones, migraciones y datos de prueba |
+| Pholsing Hugo Rubio Poma | `base-datos` | MySQL, modelos Sequelize, relaciones, migraciones y datos de prueba |
 | Joseph Daniel Rubin Fonseca | `auth-equipos` | Registro, login, JWT, middleware, validaciones y CRUD de equipos |
-| Pholsing Hugo Rubio Poma | `prestamos-pruebas` | Prestamos, devolucion, regla de prestamo unico y pruebas en Postman |
-
+| Jerry Israel Suñiga Masgo | `prestamos-pruebas` | Prestamos, devolucion, regla de prestamo unico y pruebas en Postman |
+ 
 ## Tecnologias utilizadas
 
 - Node.js
