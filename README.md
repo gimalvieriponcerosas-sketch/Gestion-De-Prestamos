@@ -1,8 +1,3 @@
- estructura-proyecto
-Updated upstream
- HEAD
-"# Gestion De Prestamos" 
-
 # Gestion-De-Prestamos
 
 # Sistema de Control de Prestamos de Equipos de Laboratorio
